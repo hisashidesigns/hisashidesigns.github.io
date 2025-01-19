@@ -1,10 +1,15 @@
-const canvas = document.getElementById("myCanvas");
-function draw() {
-	var ctx = canvas.getContext("2d");
-	ctx.canvas.width = window.innerWidth;
-	ctx.canvas.height = window.innerHeight;
-	ctx.fillStyle = "red";
-	ctx.fillRect(0, 0, 175, 50);
+//setup definitions
+const gameEnv = {
+    canvas: document.createElement("canvas"),
+    setup: (function() {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+        this.context = this.canvas.getContext("2d");
+        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        this.interval = setInterval(updateGameEnv, 16.67)
+    })(),
+    update: function() {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.frames++;
+    },
 }
-
-draw();
